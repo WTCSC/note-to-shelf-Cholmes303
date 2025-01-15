@@ -28,8 +28,8 @@ done
 
 
 # Add a note function.
-if [ $1 == "note add" ]; then 
-    if [ -n $2 ]; then
+if [ $1 = "add" ]; then 
+    if [ -n "$2" ]; then
         echo "$(date +'%Y-%m-%d_%H-%M-%S') - $2" >> notes.txt
         echo "Note has been added"
     else
@@ -39,8 +39,8 @@ if [ $1 == "note add" ]; then
 fi
 
 # List all notes function.
-if [ $1 == "list" ]; then
-    if [ -s "notes.txt"]; then
+if [ $1 = "list" ]; then
+    if [ -s "notes.txt" ]; then
         cat notes.txt
         echo exit 0
     else
@@ -50,11 +50,12 @@ if [ $1 == "list" ]; then
 fi
 
 # Search for keywords function.
-if [ $1 == "search"]; then
-    if [ -n $2]; then
+if [ $1 = "search" ]; then
+    if [ -n "$2" ]; then
         grep -i "$2" notes.txt
+        echo exit 0
     else 
-        echo "Error: No notes found with keyword"
+        echo "Error: Keyword not provided"
         Help
         echo exit 1
     fi
